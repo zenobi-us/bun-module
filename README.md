@@ -21,13 +21,6 @@ cd my-plugin
 bunx plop --plopfile ./plopfile.js
 ```
 
-Or if you prefer npm/yarn:
-
-```bash
-npm install
-npm run generate
-```
-
 ### 3. Answer the prompts
 
 The generator will ask for:
