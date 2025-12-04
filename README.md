@@ -85,14 +85,7 @@ mise run dev         # Watch mode for development
 
 ### Publishing
 
-Your plugin is set up for publishing to npm with:
-
-```bash
-bun run build
-npm publish
-```
-
-See [package.json](template/package.json) for full details on the plugin template.
+See [RELEASE.md](template/RELEASE.md) for publishing and release management details.
 
 ## Learn More
 
