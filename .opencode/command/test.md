@@ -1,78 +1,87 @@
 ---
 description: Test the OpenCode plugin generator end-to-end
+subtask: true
 ---
 
 # Testing the OpenCode Plugin Generator
 
-Help the user test the plugin generator by:
+You are a generator testing coordinator. Use the Task tool to delegate testing phases to specialized subagents. Execute these phases in sequence:
 
-1. **Verify Prerequisites**
-   - Confirm Bun is installed: `bun --version`
-   - Check git is configured: `git config user.name` and `git config user.email`
-   - User has a test directory ready
+## Phase 1: Environment Setup & Prerequisites
 
-2. **Clone and Setup**
-   - Clone the template: `git clone https://github.com/zenobi-us/opencode-plugin-template.git test-plugin`
-   - Change to directory: `cd test-plugin`
+Use a general subagent to verify the environment is ready:
 
-3. **Run Generator**
-   - Execute: `bunx plop --plopfile ./plopfile.js`
-   - Guide user through the prompts:
-     - Plugin name (kebab-case)
-     - Plugin description
-     - Author name
-     - Author email
-     - Repository URL
-     - GitHub organization/username
+**Task:** Verify prerequisites for generator testing
 
-4. **Verification Checklist**
+- Check Bun is installed: `bun --version`
+- Check git is configured: `git config user.name` and `git config user.email`
+- Create or use test directory
+- Report environment status
 
-   **Files Generated:**
-   - [ ] `package.json` exists at root
-   - [ ] `src/index.ts` exists
-   - [ ] `README.md` exists at root
-   - [ ] `.github/workflows/` directory exists
-   - [ ] All template files are present
+## Phase 2: Clone & Run Generator
 
-   **Generator Cleanup:**
-   - [ ] `template/` directory is removed
-   - [ ] `plopfile.js` is removed
-   - [ ] Old `.git/` is removed (fresh repo initialized)
+Use a general subagent to:
 
-   **Git Repository:**
-   - [ ] New `.git/` directory created
-   - [ ] On `main` branch: `git branch` shows `* main`
-   - [ ] Initial commit exists: `git log --oneline`
-   - [ ] Remote added: `git remote -v` shows origin
+- Clone template repo
+- Run `bunx plop --plopfile ./plopfile.js` with test inputs:
+  - Plugin name: `test-plugin`
+  - Description: `A test plugin`
+  - Author: `Test User`
+  - Email: `test@example.com`
+  - Repo: `https://github.com/test/test-plugin`
+  - GitHub org: `test`
 
-   **Package.json Values:**
-   - [ ] `name` matches input (kebab-case)
-   - [ ] `description` matches input
-   - [ ] `author.name` matches input
-   - [ ] `author.email` matches input
-   - [ ] `repository.url` matches input
+## Phase 3: Verify Generator Output
 
-   **README.md Values:**
-   - [ ] Plugin name appears in README
-   - [ ] Author email is present
-   - [ ] Description is included
+Use a general subagent to validate:
 
-   **Kebab-Case Conversion:**
-   Test with different formats:
-   - [ ] CamelCase input: `MyAwesomePlugin` → `my-awesome-plugin`
-   - [ ] Spaces input: `My Awesome Plugin` → `my-awesome-plugin`
-   - [ ] Underscores input: `my_awesome_plugin` → `my-awesome-plugin`
-   - [ ] Mixed special chars: `My-Awesome_Plugin!!!` → `my-awesome-plugin`
+**Files Generated:**
 
-5. **Build & Install**
-   - [ ] `bun install` succeeds
-   - [ ] `mise run build` succeeds
-   - [ ] `mise run lint` succeeds
-   - [ ] `mise run test` succeeds
+- `package.json`, `src/index.ts`, `README.md`, `.github/workflows/`
+- All expected template files present
 
-6. **Results Report**
-   - Document any failures or issues
-   - Report success with generated plugin path
-   - Provide next steps for development
+**Generator Cleanup:**
 
-Provide clear feedback on each step and help troubleshoot any failures.
+- `template/` removed
+- `plopfile.js` removed
+- Old `.git/` replaced with fresh repo
+
+**Git Repository:**
+
+- `.git/` exists and initialized
+- On `main` branch
+- Initial commit exists
+- Remote origin configured
+
+**Template Rendering:**
+
+- `package.json` name matches `test-plugin` (kebab-case)
+- `description`, `author.name`, `author.email` correctly templated
+- `repository.url` set correctly
+- `README.md` contains plugin name and author info
+
+**Kebab-Case Conversion:**
+
+- Test with various formats: CamelCase, spaces, underscores, special chars
+- Verify all convert correctly to kebab-case
+
+## Phase 4: Build & Verify Plugin
+
+Use a general subagent to:
+
+- Run `bun install`
+- Run `mise run build`
+- Run `mise run lint`
+- Run `mise run test`
+- Verify all steps succeed
+
+## Phase 5: Results & Reporting
+
+Compile results from all phases:
+
+- Overall pass/fail status
+- List of any failures or issues
+- Generated plugin path location
+- Next development steps for the user
+
+Execute all phases in order using the Task tool with appropriate subagent types. Provide the user with a comprehensive test report upon completion.
