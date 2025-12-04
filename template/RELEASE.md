@@ -36,6 +36,83 @@ While version is `0.x.x`, breaking changes bump **minor** version.
 - `docs: improve README`
 - `chore: update dependencies`
 
+## Advanced Release Features
+
+### Force a Specific Version
+
+Use the `Release-As` footer in your commit message to force a specific version, bypassing conventional commit analysis:
+
+```bash
+git commit --allow-empty -m "chore: release 2.0.0" -m "Release-As: 2.0.0"
+```
+
+This creates a commit:
+
+```
+chore: release 2.0.0
+
+Release-As: 2.0.0
+```
+
+Release Please will open a PR for version `2.0.0` regardless of commit message types.
+
+### Update Extra Files During Release
+
+If you have version numbers in other files beyond `package.json`, configure them in `release-please-config.json`:
+
+```json
+{
+  "extra-files": [
+    "src/version.ts",
+    {
+      "type": "generic",
+      "path": "docs/VERSION.md"
+    },
+    {
+      "type": "yaml",
+      "path": ".tool-versions",
+      "jsonpath": "$.node"
+    }
+  ]
+}
+```
+
+**Supported file types:**
+
+- Generic files (any type)
+- JSON files (with JSONPath)
+- YAML files (with JSONPath)
+- XML files (with XPath)
+- TOML files (with JSONPath)
+
+### Magic Comments for Version Markers
+
+Use inline comments to mark where versions should be updated:
+
+```javascript
+// x-release-please-version
+const VERSION = '1.0.0';
+
+// x-release-please-major
+const MAJOR = '1';
+```
+
+Or use block markers:
+
+```markdown
+<!-- x-release-please-start-version -->
+
+- Current version: 1.0.0
+<!-- x-release-please-end -->
+```
+
+Available markers:
+
+- `x-release-please-version` - Full semver
+- `x-release-please-major` - Major number
+- `x-release-please-minor` - Minor number
+- `x-release-please-patch` - Patch number
+
 ## Do Not
 
 - Manually edit Release Please PRs
