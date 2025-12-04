@@ -37,10 +37,15 @@ export default function (plop) {
           if (!input || input.trim().length === 0) {
             return "Plugin name cannot be empty";
           }
-          if (!/^[a-z0-9-]+$/.test(input)) {
-            return "Plugin name must contain only lowercase letters, numbers, and hyphens";
-          }
           return true;
+        },
+        filter: (input) => {
+          // Convert any format to kebab-case
+          return input
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/[\s_]+/g, "-")
+            .replace(/^-+|-+$/g, "");
         },
       },
       {
