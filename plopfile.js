@@ -108,8 +108,7 @@ export default function (plop) {
     // Create a Node script that will run the cleanup
     const scriptPath = path.join(__dirname, ".cleanup.js");
 
-    const cleanupScript = `
-import fs from 'fs';
+    const cleanupScript = `import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
@@ -168,7 +167,7 @@ try {
   console.log('✓ Staged all files');
 
   // Create initial commit
-  const commitMessage = 'chore: initialize {{pluginName}} from opencode plugin template';
+  const commitMessage = 'chore: initialize ${answers.pluginName} from opencode plugin template';
   execSync(\`git commit -m "\${commitMessage}"\`, { cwd: __dirname, stdio: 'pipe' });
   console.log('✓ Created initial commit');
 
