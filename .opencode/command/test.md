@@ -1,7 +1,6 @@
 ---
 description: Test the OpenCode plugin generator end-to-end
-subtask: true
----
+--- 
 
 # Testing the OpenCode Plugin Generator
 
