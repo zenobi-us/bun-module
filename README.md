@@ -18,7 +18,7 @@ cd my-plugin
 ### 2. Run the generator
 
 ```bash
-bunx plop
+bunx plop --plopfile ./plopfile.js
 ```
 
 Or if you prefer npm/yarn:
