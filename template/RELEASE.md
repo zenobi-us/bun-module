@@ -48,13 +48,30 @@ Releases are automatically published to NPM when the Release Please PR is merged
 
 ### NPM Trusted Publishing
 
-This project uses [NPM Trusted Publishing](https://docs.npmjs.com/generating-provenance-statements) with GitHub Actions. No npm tokens are needed - authentication is handled automatically via OIDC (OpenID Connect).
+This project uses [NPM Trusted Publishing](https://docs.npmjs.com/trusted-publishers) with GitHub Actions. No npm tokens are needed - authentication is handled automatically via OIDC (OpenID Connect).
+
+**How it works:**
+
+- Each publish uses short-lived, cryptographically-signed tokens specific to your workflow
+- Tokens cannot be extracted or reused
+- No need to manage or rotate long-lived credentials
+- Automatic provenance attestations prove where and how your package was built
+
+**Setup required:**
+
+1. Go to your npm package settings on npmjs.com
+2. Add a trusted publisher for GitHub Actions with:
+   - **Organization or user**: Your GitHub username/org
+   - **Repository**: Your repository name
+   - **Workflow filename**: `publish.yml` (the release workflow filename)
+3. Optionally, [restrict token access](https://docs.npmjs.com/trusted-publishers#recommended-restrict-token-access-when-using-trusted-publishers) for maximum security
 
 When you merge a release PR, the GitHub Actions workflow will automatically:
 
 1. Build the plugin
-2. Publish to NPM with provenance statements
-3. Create a GitHub release
+2. Publish to NPM with OIDC authentication
+3. Generate and attach provenance attestations
+4. Create a GitHub release
 
 ### Manual Releases
 
@@ -68,11 +85,13 @@ git push origin v1.2.3
 This will:
 
 1. Trigger the release workflow
-2. Create a GitHub release
-3. Publish to NPM with the tag version
+2. Build and publish to NPM using trusted publishing
+3. Create a GitHub release
 
 Use manual releases for:
 
 - Hot-fixes outside the normal release cycle
 - Bypassing Release Please when needed
-- Direct version control
+- Direct version control over releases
+
+**Learn more:** See the [NPM Trusted Publishing documentation](https://docs.npmjs.com/trusted-publishers) for complete setup and best practices.
