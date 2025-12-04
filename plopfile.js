@@ -92,7 +92,7 @@ export default function (plop) {
         },
       },
       // Custom action to handle git cleanup and reinitialization
-      async (answers) => {
+      async (answers, config, plop) => {
         const projectDir = process.cwd();
 
         console.log("🧹 Cleaning up generator files...");
