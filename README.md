@@ -1,8 +1,8 @@
-# OpenCode Plugin Template Generator
+# Bun Module Generator
 
-🎉 Generate a new OpenCode plugin in seconds!
+Generate a new Bun module in seconds!
 
-This is a generator repository for creating new [OpenCode](https://opencode.ai) plugins. It provides a starter template with all the scaffolding you need to build powerful OpenCode plugins.
+This is a generator repository for creating new Bun modules. It provides a starter template with all the scaffolding you need to build and publish Bun modules.
 
 ## Quick Start
 
@@ -11,8 +11,8 @@ This is a generator repository for creating new [OpenCode](https://opencode.ai) 
 Click "Use this template" on GitHub or clone it:
 
 ```bash
-git clone https://github.com/zenobi-us/bun-module.git my-plugin
-cd my-plugin
+git clone https://github.com/zenobi-us/bun-module.git my-module
+cd my-module
 ```
 
 ### 2. Run the generator
@@ -25,8 +25,8 @@ cd my-plugin
 
 The generator will ask for:
 
-- **Plugin name** - kebab-case identifier (e.g., `my-awesome-plugin`)
-- **Description** - What your plugin does
+- **Module name** - kebab-case identifier (e.g., `my-awesome-module`)
+- **Description** - What your module does
 - **Author name** - Your name
 - **Author email** - Your email
 - **Repository URL** - GitHub repo URL
@@ -35,7 +35,7 @@ The generator will ask for:
 ### 4. Start developing!
 
 ```bash
-cd my-plugin
+cd my-module
 bun install
 mise run build
 ```
@@ -47,7 +47,7 @@ After running the generator, you'll have:
 - ✅ TypeScript setup with modern tooling
 - ✅ ESLint + Prettier configuration
 - ✅ GitHub Actions workflows (build, lint, release)
-- ✅ OpenCode plugin scaffolding
+- ✅ Bun module scaffolding
 - ✅ Ready-to-use test setup
 - ✅ Clean git history with initial commit
 
@@ -56,7 +56,7 @@ The generator cleans itself up - no template files or setup script left behind!
 ## Usage
 
 ```bash
-# Generate a new plugin (interactive prompts)
+# Generate a new module (interactive prompts)
 ./setup.sh generate
 
 # Show help
@@ -68,19 +68,18 @@ The generator cleans itself up - no template files or setup script left behind!
 
 ## Project Structure
 
-Generated plugins have this structure:
+Generated modules have this structure:
 
 ```
-my-plugin/
+my-module/
 ├── src/
-│   ├── index.ts          # Plugin entry point
-│   ├── version.ts        # Version info
-│   └── commands/         # Your plugin commands
+│   ├── index.ts          # Module entry point
+│   └── something/else.ts # All the things! 
 ├── .github/
 │   └── workflows/        # CI/CD workflows
 ├── package.json          # Dependencies and scripts
 ├── tsconfig.json         # TypeScript config
-└── README.md             # Your plugin's documentation
+└── README.md             # Your module's documentation
 ```
 
 ## Development
@@ -105,13 +104,13 @@ mise run version     # Manage version
 
 See [RELEASE.md](template/RELEASE.md) for publishing and release management details.
 
-**TL;DR:** Push single commits to main with [conventional commit format](https://www.conventionalcommits.org/). Release-please will accumulate changes in a release PR. When this release PR is merged, a new minor version is released. Until then, all other commits on main result in patch builds being published.
+**TL;DR:** Push single commits to main with [conventional commit format](https://www.conventionalcommits.org/). Release-please will accumulate changes in a release PR. When this release PR is merged, a new minor version is released and published to npm. Until then, all other commits on main result in patch builds being published.
 
 ## Learn More
 
-- [OpenCode Documentation](https://opencode.ai/docs)
-- [Plugin Development Guide](https://opencode.ai/docs/plugins)
-- [OpenCode GitHub](https://github.com/opencode-ai/opencode)
+- [Bun Documentation](https://bun.sh)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+- [npm Publishing Guide](https://docs.npmjs.com/packages-and-modules)
 
 ## License
 
@@ -121,6 +120,6 @@ MIT
 
 Need help?
 
-- Check the [OpenCode docs](https://opencode.ai/docs)
+- Check the [Bun documentation](https://bun.sh)
 - Open an issue on [GitHub](https://github.com/zenobi-us/bun-module/issues)
-- Report bugs at https://github.com/sst/opencode
+- Review the [template documentation](template/README.md)
