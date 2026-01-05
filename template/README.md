@@ -2,7 +2,7 @@
 
 {{description}}
 
-> An OpenCode plugin created from the [opencode-plugin-template](https://github.com/zenobi-us/opencode-plugin-template)
+> An OpenCode plugin created from the [bun-module](https://github.com/zenobi-us/bun-module)
 
 ## Features
 
@@ -19,7 +19,7 @@
 1. **Clone this template:**
 
    ```bash
-   cp -r opencode-plugin-template your-plugin-name
+   cp -r bun-module your-plugin-name
    cd your-plugin-name
    ```
 

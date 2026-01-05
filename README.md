@@ -11,7 +11,7 @@ This is a generator repository for creating new [OpenCode](https://opencode.ai) 
 Click "Use this template" on GitHub or clone it:
 
 ```bash
-git clone https://github.com/zenobi-us/opencode-plugin-template.git my-plugin
+git clone https://github.com/zenobi-us/bun-module.git my-plugin
 cd my-plugin
 ```
 
@@ -122,5 +122,5 @@ MIT
 Need help?
 
 - Check the [OpenCode docs](https://opencode.ai/docs)
-- Open an issue on [GitHub](https://github.com/zenobi-us/opencode-plugin-template/issues)
+- Open an issue on [GitHub](https://github.com/zenobi-us/bun-module/issues)
 - Report bugs at https://github.com/sst/opencode
