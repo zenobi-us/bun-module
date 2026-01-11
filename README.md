@@ -66,6 +66,34 @@ The generator cleans itself up - no template files or setup script left behind!
 ./setup.sh version
 ```
 
+### Non-Interactive Mode
+
+You can skip prompts by setting environment variables with the `BUNMODULE_` prefix:
+
+```bash
+# Provide all values via environment variables
+BUNMODULE_MODULENAME="my-awesome-module" \
+BUNMODULE_DESCRIPTION="An awesome Bun module" \
+BUNMODULE_AUTHORNAME="John Doe" \
+BUNMODULE_AUTHOREMAIL="john@example.com" \
+BUNMODULE_REPOSITORYURL="https://github.com/username/my-awesome-module" \
+BUNMODULE_GITHUBORG="username" \
+./setup.sh generate
+```
+
+**Available Environment Variables:**
+- `BUNMODULE_MODULENAME` - Module name (kebab-case)
+- `BUNMODULE_DESCRIPTION` - Module description
+- `BUNMODULE_AUTHORNAME` - Author name
+- `BUNMODULE_AUTHOREMAIL` - Author email
+- `BUNMODULE_REPOSITORYURL` - Repository URL
+- `BUNMODULE_GITHUBORG` - GitHub organization/username
+
+This is useful for:
+- CI/CD pipelines
+- Automated module generation
+- Scripted workflows
+
 ## Project Structure
 
 Generated modules have this structure:

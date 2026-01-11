@@ -7,6 +7,12 @@ set -euo pipefail
 # ============================================================================
 # Pure bash replacement for plopfile.js with discrete functions, exit traps,
 # and subcommand routing
+#
+# Environment Variable Support:
+# Set PREFIX_VARIABLENAME to provide defaults for prompts
+# Example: BUNMODULE_AUTHORNAME="John Doe" ./setup.sh
+#
+readonly PREFIX="BUNMODULE"
 
 # Script configuration
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -94,11 +100,28 @@ validate_plugin_name() {
 	echo "$name"
 }
 
-# Prompt user for input with default
+# Get value from environment variable ${PREFIX}_${1}
+env_input() {
+	local var_name="${PREFIX}_${1}"
+	echo "${!var_name:-}"
+}
+
+# Prompt user for input with default, checking environment variable first
 prompt_input() {
 	local prompt_text="$1"
 	local default_value="$2"
+	local env_var_name="${3:-}"  # Optional environment variable name
 	local input
+	local env_value=""
+
+	# Check for environment variable if name provided
+	if [[ -n "$env_var_name" ]]; then
+		env_value=$(env_input "$env_var_name")
+		if [[ -n "$env_value" ]]; then
+			echo "$env_value"
+			return 0
+		fi
+	fi
 
 	read -p "$(echo -ne '? ')$prompt_text [$default_value]: " input
 	echo "${input:-$default_value}"
@@ -232,24 +255,24 @@ cmd_generate() {
 
 	# Gather user inputs
 	local plugin_name
-	plugin_name=$(prompt_input "Plugin name (kebab-case)" "my-bun-module")
+	plugin_name=$(prompt_input "Module name (kebab-case)" "my-bun-module" "MODULENAME")
 	plugin_name=$(kebab_case "$plugin_name")
 	validate_plugin_name "$plugin_name" >/dev/null
 
 	local description
-	description=$(prompt_input "Module description" "A Bun module")
+	description=$(prompt_input "Module description" "A Bun module" "DESCRIPTION")
 
 	local author_name
-	author_name=$(prompt_input "Author name" "Your Name")
+	author_name=$(prompt_input "Author name" "Your Name" "AUTHORNAME")
 
 	local author_email
-	author_email=$(prompt_input "Author email" "you@example.com")
+	author_email=$(prompt_input "Author email" "you@example.com" "AUTHOREMAIL")
 
 	local repository_url
-	repository_url=$(prompt_input "Repository URL" "$default_remote")
+	repository_url=$(prompt_input "Repository URL" "$default_remote" "REPOSITORYURL")
 
 	local github_org
-	github_org=$(prompt_input "GitHub organization/username" "username")
+	github_org=$(prompt_input "GitHub organization/username" "username" "GITHUBORG")
 
 	echo ""
 
@@ -296,10 +319,24 @@ ${BLUE}Commands:${NC}
   help        Show this help message
   version     Show version information
 
+${BLUE}Environment Variables:${NC}
+  Set ${PREFIX}_VARIABLENAME to skip prompts and provide defaults:
+  
+  ${PREFIX}_MODULENAME        Module name (kebab-case)
+  ${PREFIX}_DESCRIPTION       Module description
+  ${PREFIX}_AUTHORNAME        Author name
+  ${PREFIX}_AUTHOREMAIL       Author email
+  ${PREFIX}_REPOSITORYURL     Repository URL
+  ${PREFIX}_GITHUBORG         GitHub organization/username
+
 ${BLUE}Examples:${NC}
   ./setup.sh generate
-  ./setup.sh help
-  ./setup.sh version
+  
+  # Non-interactive mode using environment variables:
+  BUNMODULE_MODULENAME="my-awesome-module" \\
+  BUNMODULE_AUTHORNAME="John Doe" \\
+  BUNMODULE_AUTHOREMAIL="john@example.com" \\
+  ./setup.sh generate
 
 ${BLUE}Documentation:${NC}
   https://github.com/zenobi-us/bun-module
