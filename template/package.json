@@ -1,5 +1,5 @@
 {
-  "name": "{{pluginName}}",
+  "name": "{{moduleName}}",
   "version": "0.1.0",
   "description": "{{description}}",
   "author": {
@@ -25,9 +25,6 @@
     "dist",
     "src/version.ts"
   ],
-  "dependencies": {
-    "@opencode-ai/plugin": "1.0.85"
-  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^20.11.5",

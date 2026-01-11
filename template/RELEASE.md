@@ -148,7 +148,7 @@ This project uses [NPM Trusted Publishing](https://docs.npmjs.com/trusted-publis
 
 When you merge a release PR, the GitHub Actions workflow will automatically:
 
-1. Build the plugin
+1. Build the module
 2. Publish to NPM with OIDC authentication
 3. Generate and attach provenance attestations
 4. Create a GitHub release

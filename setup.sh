@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # ============================================================================
-# OpenCode Plugin Template Setup Script
+# Bun Module Template Setup Script
 # ============================================================================
 # Pure bash replacement for plopfile.js with discrete functions, exit traps,
 # and subcommand routing
@@ -85,11 +85,11 @@ get_git_remote() {
 	echo ""
 }
 
-# Validate plugin name (kebab-case, non-empty)
+# Validate module name (kebab-case, non-empty)
 validate_plugin_name() {
 	local name="$1"
 	if [[ -z "$name" ]]; then
-		die "Plugin name cannot be empty"
+		die "Module name cannot be empty"
 	fi
 	echo "$name"
 }
@@ -135,7 +135,7 @@ apply_template() {
 		# Skip binary files
 		if file "$file" | grep -q "text"; then
 			sed -i.bak \
-				-e "s|{{pluginName}}|$plugin_name|g" \
+				-e "s|{{moduleName}}|$plugin_name|g" \
 				-e "s|{{description}}|$description|g" \
 				-e "s|{{authorName}}|$author_name|g" \
 				-e "s|{{authorEmail}}|$author_email|g" \
@@ -190,7 +190,7 @@ init_git_repo() {
 	success "Staged all files"
 
 	# Create initial commit
-	local commit_msg="chore: initialize $plugin_name from opencode plugin template"
+	local commit_msg="chore: initialize $plugin_name from bun-module template"
 	git -C "$project_dir" commit -m "$commit_msg" >/dev/null 2>&1
 	success "Created initial commit"
 
@@ -222,22 +222,22 @@ cmd_generate() {
 	fi
 
 	echo ""
-	echo -e "${BLUE}🎉 OpenCode Plugin Template Generator${NC}"
+	echo -e "${BLUE}🎉 Bun Module Template Generator${NC}"
 	echo ""
 
 	# Get git remote URL for default
 	local default_remote
 	default_remote=$(get_git_remote)
-	[[ -z "$default_remote" ]] && default_remote="https://github.com/username/my-opencode-plugin"
+	[[ -z "$default_remote" ]] && default_remote="https://github.com/username/my-bun-module"
 
 	# Gather user inputs
 	local plugin_name
-	plugin_name=$(prompt_input "Plugin name (kebab-case)" "my-opencode-plugin")
+	plugin_name=$(prompt_input "Plugin name (kebab-case)" "my-bun-module")
 	plugin_name=$(kebab_case "$plugin_name")
 	validate_plugin_name "$plugin_name" >/dev/null
 
 	local description
-	description=$(prompt_input "Plugin description" "An OpenCode plugin")
+	description=$(prompt_input "Module description" "A Bun module")
 
 	local author_name
 	author_name=$(prompt_input "Author name" "Your Name")
@@ -269,12 +269,12 @@ cmd_generate() {
 
 	# Print success message and next steps
 	echo ""
-	echo -e "${GREEN}✨ Plugin generated successfully!${NC}"
+	echo -e "${GREEN}✨ Module generated successfully!${NC}"
 	echo ""
 	echo -e "${BLUE}Next steps:${NC}"
 	echo "  1. Review package.json and update name/version as needed"
-	echo "  2. Update README.md with your plugin details"
-	echo "  3. Implement your plugin in src/"
+	echo "  2. Update README.md with your module details"
+	echo "  3. Implement your module in src/"
 	echo "  4. Run: bun install"
 	echo "  5. Run: mise run build"
 	echo ""
@@ -286,13 +286,13 @@ cmd_generate() {
 
 cmd_help() {
 	cat <<EOF
-${BLUE}OpenCode Plugin Template Setup${NC}
+${BLUE}Bun Module Template Setup${NC}
 
 ${BLUE}Usage:${NC}
   ./setup.sh [command]
 
 ${BLUE}Commands:${NC}
-  generate    Generate a new OpenCode plugin (default)
+  generate    Generate a new Bun module (default)
   help        Show this help message
   version     Show version information
 
@@ -302,13 +302,13 @@ ${BLUE}Examples:${NC}
   ./setup.sh version
 
 ${BLUE}Documentation:${NC}
-  https://opencode.ai/docs
+  https://github.com/zenobi-us/bun-module
 
 EOF
 }
 
 cmd_version() {
-	echo "OpenCode Plugin Template Setup v$VERSION"
+	echo "Bun Module Template Setup v$VERSION"
 }
 
 # ============================================================================

@@ -1,12 +1,12 @@
-# {{pluginName}}
+# {{moduleName}}
 
 {{description}}
 
-> An OpenCode plugin created from the [bun-module](https://github.com/zenobi-us/bun-module)
+> A Bun module created from the [bun-module](https://github.com/zenobi-us/bun-module) template
 
 ## Features
 
-- 🏗️ TypeScript-based plugin architecture
+- 🏗️ TypeScript-based module architecture
 - 🔧 Mise task runner integration
 - 📦 Bun/npm build tooling
 - ✨ ESLint + Prettier formatting
@@ -19,12 +19,12 @@
 1. **Clone this template:**
 
    ```bash
-   cp -r bun-module your-plugin-name
-   cd your-plugin-name
+   cp -r bun-module your-module-name
+   cd your-module-name
    ```
 
 2. **Update package.json:**
-   - Change `name` to your plugin name
+   - Change `name` to your module name
    - Update `description`
    - Update `repository.url`
 
@@ -34,42 +34,26 @@
    bun install
    ```
 
-4. **Implement your plugin in `src/index.ts`:**
+4. **Implement your module in `src/index.ts`:**
 
    ```typescript
-   import type { Plugin } from '@opencode-ai/plugin';
-
-   export const YourPlugin: Plugin = async (ctx) => {
-     return {
-       tool: {
-         // Your plugin tools here
-       },
-     };
-   };
+   export function hello(name: string): string {
+     return `Hello, ${name}!`;
+   }
    ```
 
-5. **Test your plugin:**
+5. **Test your module:**
    ```bash
    mise run test
    ```
 
 ## Development
 
-- `mise run build` - Build the plugin
+- `mise run build` - Build the module
 - `mise run test` - Run tests
 - `mise run lint` - Lint code
 - `mise run lint:fix` - Fix linting issues
 - `mise run format` - Format code with Prettier
-
-## Installation in OpenCode
-
-Create or edit `~/.config/opencode/config.json`:
-
-```json
-{
-  "plugins": ["{{pluginName}}"]
-}
-```
 
 ## Author
 

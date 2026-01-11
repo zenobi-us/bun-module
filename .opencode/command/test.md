@@ -1,8 +1,8 @@
 ---
-description: Test the OpenCode plugin generator end-to-end
+description: Test the Bun Module generator end-to-end
 --- 
 
-# Testing the OpenCode Plugin Generator
+# Testing the Bun Module Generator
 
 You are a generator testing coordinator. Use the Task tool to delegate testing phases to specialized subagents. Execute these phases in sequence:
 
@@ -23,11 +23,11 @@ Use a general subagent to:
 
 - Clone template repo
 - Run `./setup.sh` with test inputs:
-  - Plugin name: `test-plugin`
-  - Description: `A test plugin`
+  - Module name: `test-module`
+  - Description: `A test module`
   - Author: `Test User`
   - Email: `test@example.com`
-  - Repo: `https://github.com/test/test-plugin`
+  - Repo: `https://github.com/test/test-module`
   - GitHub org: `test`
 
 ## Phase 3: Verify Generator Output
@@ -54,17 +54,17 @@ Using `task(general)` to validate:
 
 **Template Rendering:**
 
-- `package.json` name matches `test-plugin` (kebab-case)
+- `package.json` name matches `test-module` (kebab-case)
 - `description`, `author.name`, `author.email` correctly templated
 - `repository.url` set correctly
-- `README.md` contains plugin name and author info
+- `README.md` contains module name and author info
 
 **Kebab-Case Conversion:**
 
 - Test with various formats: CamelCase, spaces, underscores, special chars
 - Verify all convert correctly to kebab-case
 
-## Phase 4: Build & Verify Plugin
+## Phase 4: Build & Verify Module
 
 Use a general subagent to:
 
@@ -80,7 +80,7 @@ Compile results from all phases:
 
 - Overall pass/fail status
 - List of any failures or issues
-- Generated plugin path location
+- Generated module path location
 - Next development steps for the user
 
 Execute all phases in order using the Task tool with appropriate subagent types. Provide the user with a comprehensive test report upon completion.

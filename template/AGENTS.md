@@ -60,6 +60,6 @@
 
 ## Project Context
 
-- **Type**: ES Module package for OpenCode plugin system
+- **Type**: ES Module package for Bun modules
 - **Target**: Bun runtime, ES2021+
-- **Purpose**: Background task execution and lifecycle management
+- **Purpose**: General-purpose Bun module development

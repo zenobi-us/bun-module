@@ -89,14 +89,14 @@ my-module/
 ```bash
 bun install          # Install dependencies
 mise run setup       # Initial setup
-mise run build       # Build the plugin
+mise run build       # Build the module
 mise run test        # Run tests
 mise run lint        # Lint code
 mise run lint:fix    # Fix linting issues
 mise run format      # Format code with Prettier
 mise run pkgjsonlint # Lint package.json
 mise run prepare     # Prepare for release
-mise run publish     # Publish the plugin
+mise run publish     # Publish the module
 mise run version     # Manage version
 ```
 
