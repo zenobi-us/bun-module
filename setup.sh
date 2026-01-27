@@ -76,11 +76,11 @@ info() {
 # Convert string to kebab-case
 kebab_case() {
 	local input="$1"
-	echo "$input" \
-		| tr '[:upper:]' '[:lower:]' \
-		| sed 's/[^a-z0-9\s-]//g' \
-		| sed 's/[[:space:]_]\+/-/g' \
-		| sed 's/^-\+\|-\+$//g'
+	echo "$input" |
+		tr '[:upper:]' '[:lower:]' |
+		sed 's/[^a-z0-9\s-]//g' |
+		sed 's/[[:space:]_]\+/-/g' |
+		sed 's/^-\+\|-\+$//g'
 }
 
 # Get git remote URL with fallback
@@ -110,7 +110,7 @@ env_input() {
 prompt_input() {
 	local prompt_text="$1"
 	local default_value="$2"
-	local env_var_name="${3:-}"  # Optional environment variable name
+	local env_var_name="${3:-}" # Optional environment variable name
 	local input
 	local env_value=""
 
@@ -290,6 +290,8 @@ cmd_generate() {
 	cleanup_git "$current_dir"
 	init_git_repo "$current_dir" "$plugin_name" "$repository_url"
 
+	mise trust >/dev/null 2>&1 || warn "Could not run 'mise trust'. Please ensure mise is installed."
+
 	# Print success message and next steps
 	echo ""
 	echo -e "${GREEN}✨ Module generated successfully!${NC}"
@@ -300,6 +302,9 @@ cmd_generate() {
 	echo "  3. Implement your module in src/"
 	echo "  4. Run: bun install"
 	echo "  5. Run: mise run build"
+	echo "  6. Commit as chore: implement module"
+	echo "  7. Run: mise run publish --tag next"
+	echo "  8. Follow Trusted Publisher instructions in ./RELEASE.md"
 	echo ""
 }
 

@@ -53,6 +53,21 @@ After running the generator, you'll have:
 
 The generator cleans itself up - no template files or setup script left behind!
 
+### 5. Setup publishing
+
+This repo encouranges using [release-please](http://github.com/googleapis/release-please) for automated releases.
+
+However, before you can rely on that, you need to set up a few things:
+
+1. Manually publish the first version to npm:
+
+   ```bash
+   mise run publish
+   ```
+
+2. Follow the instructions in `./template/RELEASE.md` to set up this repository with npm trusted publishing.
+
+
 ## Usage
 
 ```bash
