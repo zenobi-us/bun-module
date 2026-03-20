@@ -3,7 +3,6 @@ name: Pr
 on:
   pull_request:
   pull_request_target:
-  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
